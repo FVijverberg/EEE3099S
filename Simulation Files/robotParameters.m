@@ -6,4 +6,17 @@ load wheelLUT %Look up table for platform motors
 Ts = 0.01; %Sample time
 maxV = (160/30)*pi*wheelR;
 load wheelMotorModel %Motor model for platform motorswheelMotorModel
-load winding_v2.mat
+load Straight_line_with_objects.mat
+
+lineSenPosition = [[0.0643 0.0353], [0.0675 0.005], [0.0643 -0.0353], [0.0675,-0.005]];
+
+velTF = tf(wheelMotorModel);
+integrator = tf(1, [1, -1], ts = -1, Variable = 'z^-1');
+gain = (2*pi*wheelR)/ticksPerRot;
+posTF = gain*velTF*integrator;
+
+xInitial = 0.45;
+yInitial = 0.12;
+thetaInitial = 0;
+
+distanceSimulated = 1; % Distance variable used during simulation of location storage
