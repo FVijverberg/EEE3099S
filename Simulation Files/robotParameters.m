@@ -6,7 +6,7 @@ load wheelLUT %Look up table for platform motors
 Ts = 0.01; %Sample time
 maxV = (160/30)*pi*wheelR;
 load wheelMotorModel %Motor model for platform motorswheelMotorModel
-load Straight_line_with_objects.mat
+load hardcore_challenging_maze.mat
 
 lineSenPosition = [[0.0643 0.0353], [0.0675 0.005], [0.0643 -0.0353], [0.0675,-0.005]];
 
@@ -15,8 +15,8 @@ integrator = tf(1, [1, -1], ts = -1, Variable = 'z^-1');
 gain = (2*pi*wheelR)/ticksPerRot;
 posTF = gain*velTF*integrator;
 
-xInitial = 1;
-yInitial = 0.2;
+xInitial = 1.2431;
+yInitial = 3.095;
 thetaInitial = 90;
 
 distanceSimulated = 1; % Distance variable used during simulation of location storage
